@@ -108,8 +108,8 @@ class Notice(models.Model):
     notice_item = models.CharField('公告标题', max_length=64)
     news_type = (('picture_news', '图片新闻'), ('video_news', '视频新闻'))
     notice_type = models.CharField('新闻类型', max_length=32, choices=news_type)
-    notice_picture_content = models.ImageField('图片新闻公告内容', upload_to='p_content')
-    notice_video_content = models.FileField('视频新闻公告内容', upload_to='v_content')
+    notice_picture_content = models.ImageField('图片新闻公告内容', upload_to='p_content', default=0)
+    notice_video_content = models.FileField('视频新闻公告内容', upload_to='v_content', default=0)
     notice_academy = models.CharField('学院', max_length=32, choices=academy, null=True)
 
 

@@ -12,6 +12,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = "*"
 
+TIME_ZONE = 'Asia/Shanghai'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -8,11 +8,11 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 
 from .forms import NewTopicForm, PostForm
-from .models import SportMeet, Post, Topic
+from .models import SportMeet, Post, Topic, Notice
 
 
 class BoardListView(ListView):
-    model = SportMeet
+    model = Notice
     context_object_name = 'boards'
     template_name = 'home.html'
 

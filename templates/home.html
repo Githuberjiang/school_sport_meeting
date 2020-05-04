@@ -20,33 +20,35 @@
       {% for board in boards %}
         <tr>
           <td>
-              <span>请填写公告标题</span>
-            <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
-            <small class="text-muted d-block">{{ board.description }}</small>
+{#              <span>请填写公告标题</span>#}
+            <a href="{% url 'board_topics' board.pk %}">{{ board.notice_item }}</a>
+            <small class="text-muted d-block">{{ board.notice_item }}</small>
           </td>
           <td class="align-middle">
-              <span>请填写公告类型</span>
-            {{ board.get_posts_count }}
+{#              <span>请填写公告类型</span>#}
+            {{ board.notice_type }}
           </td>
           <td class="align-middle">
               <span>请填写公告内容</span>
-            {{ board.topics.count }}
+            {{ board.notice_picture_content }}
+            {{ board.notice_video_content }}
           </td>
           <td class="align-middle">
           <span>请填写公告上传部门</span>
-            {% with post=board.get_last_post %}
-              {% if post %}
-                <small>
-                  <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
-                    By {{ post.created_by.username }} {{ post.created_at|naturaltime }}
-                  </a>
-                </small>
-              {% else %}
-                <small class="text-muted">
-                  <em>No posts yet.</em>
-                </small>
-              {% endif %}
-            {% endwith %}
+              {{boards.notice_academy}}
+{#            {% with post=board.get_last_post %}#}
+{#              {% if post %}#}
+{#                <small>#}
+{#                  <a href="{% url 'topic_posts' board.pk post.topic.pk %}">#}
+{#                    By {{ post.created_by.username }} {{ post.created_at|naturaltime }}#}
+{#                  </a>#}
+{#                </small>#}
+{#              {% else %}#}
+{#                <small class="text-muted">#}
+{#                  <em>No posts yet.</em>#}
+{#                </small>#}
+{#              {% endif %}#}
+{#            {% endwith %}#}
           </td>
         </tr>
       {% endfor %}
