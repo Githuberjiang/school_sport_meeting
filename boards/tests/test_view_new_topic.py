@@ -3,13 +3,13 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from ..forms import NewTopicForm
-from ..models import Board, Post, Topic
+from ..models import SportMeet, Post, Topic
 from ..views import new_topic
 
 
 class NewTopicTests(TestCase):
     def setUp(self):
-        Board.objects.create(name='Django', description='Django board.')
+        SportMeet.objects.create(name='Django', description='Django board.')
         User.objects.create_user(username='john', email='john@doe.com', password='123')
         self.client.login(username='john', password='123')
 
@@ -83,7 +83,7 @@ class NewTopicTests(TestCase):
 
 class LoginRequiredNewTopicTests(TestCase):
     def setUp(self):
-        Board.objects.create(name='Django', description='Django board.')
+        SportMeet.objects.create(name='Django', description='Django board.')
         self.url = reverse('new_topic', kwargs={'pk': 1})
         self.response = self.client.get(self.url)
 

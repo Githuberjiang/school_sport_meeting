@@ -8,11 +8,11 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 
 from .forms import NewTopicForm, PostForm
-from .models import Board, Post, Topic
+from .models import SportMeet, Post, Topic
 
 
 class BoardListView(ListView):
-    model = Board
+    model = SportMeet
     context_object_name = 'boards'
     template_name = 'home.html'
 
@@ -28,7 +28,7 @@ class TopicListView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.board = get_object_or_404(Board, pk=self.kwargs.get('pk'))
+        self.board = get_object_or_404(SportMeet, pk=self.kwargs.get('pk'))
         queryset = self.board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
         return queryset
 
@@ -56,7 +56,7 @@ class PostListView(ListView):
 
 @login_required
 def new_topic(request, pk):
-    board = get_object_or_404(Board, pk=pk)
+    board = get_object_or_404(SportMeet, pk=pk)
     if request.method == 'POST':
         form = NewTopicForm(request.POST)
         if form.is_valid():

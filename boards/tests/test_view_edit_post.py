@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from ..models import Board, Post, Topic
+from ..models import SportMeet, Post, Topic
 from ..views import PostUpdateView
 
 
@@ -13,7 +13,7 @@ class PostUpdateViewTestCase(TestCase):
     Base test case to be used in all `PostUpdateView` view tests
     '''
     def setUp(self):
-        self.board = Board.objects.create(name='Django', description='Django board.')
+        self.board = SportMeet.objects.create(name='Django', description='Django board.')
         self.username = 'john'
         self.password = '123'
         user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)

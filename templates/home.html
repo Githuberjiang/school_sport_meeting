@@ -3,33 +3,37 @@
 {% load humanize %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active">Boards</li>
+  <li class="breadcrumb-item active"><span>公告：以下为公告信息</span></li>
 {% endblock %}
 
 {% block content %}
   <table class="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Board</th>
-        <th>Posts</th>
-        <th>Topics</th>
-        <th>Last Post</th>
+        <th>公告标题</th>
+        <th>类型</th>
+        <th>内容</th>
+        <th>上传部门</th>
       </tr>
     </thead>
     <tbody>
       {% for board in boards %}
         <tr>
           <td>
+              <span>请填写公告标题</span>
             <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
             <small class="text-muted d-block">{{ board.description }}</small>
           </td>
           <td class="align-middle">
+              <span>请填写公告类型</span>
             {{ board.get_posts_count }}
           </td>
           <td class="align-middle">
+              <span>请填写公告内容</span>
             {{ board.topics.count }}
           </td>
           <td class="align-middle">
+          <span>请填写公告上传部门</span>
             {% with post=board.get_last_post %}
               {% if post %}
                 <small>

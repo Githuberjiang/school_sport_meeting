@@ -1,13 +1,13 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from ..models import Board
+from ..models import SportMeet
 from ..views import TopicListView
 
 
 class BoardTopicsTests(TestCase):
     def setUp(self):
-        Board.objects.create(name='Django', description='Django board.')
+        SportMeet.objects.create(name='Django', description='Django board.')
 
     def test_board_topics_view_success_status_code(self):
         url = reverse('board_topics', kwargs={'pk': 1})
