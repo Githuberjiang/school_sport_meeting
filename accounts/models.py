@@ -7,15 +7,15 @@ from django.db import models
 # # Create your models here.
 #
 #
-# academy = (
-#     ('school', '清华大学'),
-#     ('Mines', '矿业学院'),
-#     ('Law', '法学院'),
-#     ('Art_Design', '美术学院'),
-#     ('Economics', '经济学院'),
-#     ('Management', '管理学院'),
-#     ('Computer_Science', '计算机科学学院')
-# )
+academy = (
+    ('school', '清华大学'),
+    ('Mines', '矿业学院'),
+    ('Law', '法学院'),
+    ('Art_Design', '美术学院'),
+    ('Economics', '经济学院'),
+    ('Management', '管理学院'),
+    ('Computer_Science', '计算机科学学院')
+)
 #
 #
 # class Classes(models.Model):
@@ -49,7 +49,7 @@ from django.db import models
 #     user_sex = models.CharField('性别', choices=sex_type, max_length=32, blank=True, null=True)
 #     user_academy = models.CharField('学院', choices=academy, null=True)
 #     classes_id = models.ForeignKey('Classes', on_delete=models.CASCADE, verbose_name='班级')
-#
+
 #
 # class Application(models.Model):
 #     """

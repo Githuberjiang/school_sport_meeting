@@ -54,10 +54,63 @@ class Classes(models.Model):
         return Post.objects.filter(topic__board=self).order_by('-created_at').first()
 
 
+academy = (
+    ('school', '清华大学'),
+    ('Mines', '矿业学院'),
+    ('Law', '法学院'),
+    ('Art_Design', '美术学院'),
+    ('Economics', '经济学院'),
+    ('Management', '管理学院'),
+    ('Computer_Science', '计算机科学学院')
+)
 
 
+class SUser(models.Model):
+    """
+    用户表
+    """
+    user_id = models.AutoField('用户编号', primary_key=True)
+    user_nick = models.CharField('用户名（昵称）', max_length=32, unique=True)
+    user_pwd = models.CharField(max_length=128)
+    user_name = models.CharField('姓名', max_length=32)
+    user_phonenumber = models.CharField('手机号', max_length=32, blank=True, null=True)
+    role_type = (('manager', '管理员'), ('user', '运动员'))
+    user_role = models.CharField('身份', choices=role_type, max_length=16, default='manager', blank=True, null=True)
+    sex_type = (('male', '男'), ('female', '女'))
+    user_sex = models.CharField('性别', choices=sex_type, max_length=32, blank=True, null=True)
+    user_academy = models.CharField('学院', max_length=32, choices=academy, null=True)
+    classes_id = models.ForeignKey('Classes', on_delete=models.CASCADE, verbose_name='班级', default=1)
 
 
+class Application(models.Model):
+    """
+    申请表
+    """
+    status_type = (('unapprove', '未通过'), ('approve', '通过'), ('unreview', '未审核'))
+    app_status = models.CharField('审核状态', max_length=20, choices=status_type, default='unreview', null=True)
+    sport_id = models.ForeignKey('SportMeet', verbose_name='运动项目', null=True)
+    user_id = models.ForeignKey('SUser', verbose_name='用户')
+
+
+class Score(models.Model):
+    """
+    成绩表
+    """
+    user_id = models.ForeignKey('SUser', verbose_name='用户')
+    sport_id = models.ForeignKey('SportMeet', verbose_name='运动项目')
+    score = models.IntegerField('分数', default=0)
+
+
+class Notice(models.Model):
+    """
+    公告表
+    """
+    notice_item = models.CharField('公告标题', max_length=64)
+    news_type = (('picture_news', '图片新闻'), ('video_news', '视频新闻'))
+    notice_type = models.CharField('新闻类型', max_length=32, choices=news_type)
+    notice_picture_content = models.ImageField('图片新闻公告内容', upload_to='p_content')
+    notice_video_content = models.FileField('视频新闻公告内容', upload_to='v_content')
+    notice_academy = models.CharField('学院', max_length=32, choices=academy, null=True)
 
 
 class Topic(models.Model):
