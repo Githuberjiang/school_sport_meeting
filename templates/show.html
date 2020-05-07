@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active"><span>公告：以下为公告信息</span></li>
+  <li class="breadcrumb-item active"><span>运动会信息展示</span></li>
 {% endblock %}
 
 {% block content %}
@@ -11,39 +11,37 @@
     <thead class="thead-inverse">
       <tr>
 
-        <th>公告标题</th>
-        <th>内容描述</th>
-        <th>上传单位</th>
-        <th>作者</th>
-        <th>日期</th>
+        <th>项目名称</th>
+        <th>限定人数</th>
+        <th>比赛分组</th>
+        <th>比赛地点</th>
+        <th>比赛时间</th>
       </tr>
     </thead>
     <tbody>
-      {% for board in boards %}
+      {% for sport in sports %}
         <tr>
-{#          <td >#}
-{#            <span class="text-muted d-block">{{ board.notice_id }}</span>#}
-{#          </td>#}
+
 
           <td class="align-middle">
 {#              <span>请填写公告类型</span>#}
-            {{ board.notice_title }}
+            {{ sport.sport_name }}
           </td>
           <td class="align-middle">
 
-            {{ board.notice_content }}
+            {{ sport.sport_limit_people }}
 
           </td>
           <td class="align-middle">
-              {{board.update_group}}
+              {{sport.sport_group}}
 
           </td>
           <td class="align-middle">
-              {{board.update_user}}
+              {{sport.sport_address}}
 
           </td>
           <td class="align-middle">
-              {{board.update_date}}
+              {{sport.sport_date}}
 
           </td>
         </tr>

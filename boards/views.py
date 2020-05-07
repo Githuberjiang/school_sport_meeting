@@ -17,6 +17,12 @@ class BoardListView(ListView):
     template_name = 'home.html'
 
 
+class Show(ListView):
+    model = SportMeet
+    context_object_name = 'sports'
+    template_name = 'show.html'
+
+
 class TopicListView(ListView):
     model = Topic
     context_object_name = 'topics'

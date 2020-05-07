@@ -5,7 +5,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -13,7 +12,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = "*"
 
 TIME_ZONE = 'Asia/Shanghai'
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -69,11 +67,13 @@ DATABASES = {
         'PORT': 3306,  # 数据库端口
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '',  # 数据库用户密码
-        'NAME': 'nssm'  # 数据库名字
+        'NAME': 'nssm',  # 数据库名字
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        }
     }
+
 }
-
-
 
 # AUTH_USER_MODEL = 'boards.SUser'
 
@@ -92,17 +92,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'zh-Hans'
-
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
@@ -124,7 +120,6 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
 DEFAULT_FROM_EMAIL = 'Django Boards <noreply@djangoboards.com>'
 EMAIL_SUBJECT_PREFIX = '[Django Boards] '
-
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
