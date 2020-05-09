@@ -24,7 +24,7 @@ class StudentUser(models.Model):
     phone_number = models.CharField("电话",max_length=11, default=13345678889)
 
     def __str__(self):
-        return self.student_true_name
+        return self.student_name
 
 
 class Notice(models.Model):

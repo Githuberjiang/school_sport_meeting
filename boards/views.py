@@ -44,8 +44,15 @@ def apply(request):
         form_data = request.POST
         studen_name = form_data.get("student_name")
         spo_name = form_data.get("sport_name")
+        print(studen_name)
         spo_obj = SportMeet.objects.filter(sport_name=spo_name)
-        stu_obj = StudentUser.objects.filter(student_true_name=studen_name)
+        stu_obj_pk = User.objects.filter(first_name=studen_name).first().pk
+        if not stu_obj_pk:
+            err = "当前用户未与学生关联，请联系管理员"
+            return render(request, 'apply.html', {"err": err})
+        stu_obj = StudentUser.objects.filter(user_id=stu_obj_pk)
+        print(444445,stu_obj, stu_obj_pk)
+        # stu_obj = StudentUser.objects.filter(student_true_name=studen_name)
         # spo_limit = SportMeet.objects.filter(sport_limit_people=)
         if spo_obj and stu_obj:
             if Application.objects.filter(sport_id=spo_obj[0], user_id=stu_obj[0]):
@@ -63,13 +70,13 @@ def apply(request):
             err = "填写信息有误，请核实"
             return render(request, 'apply.html', {"err": err})
     else:
-        user = request.path_info.split("/")[2]
-        user_obj = User.objects.filter(username=user)[0]
-        user_true_name = user_obj.student_user.first().student_true_name
+        user = request.path_info.split("/")[2]  # root
+        user_obj = User.objects.filter(username=user)[0].first_name
+        # user_true_name = user_obj.student_user.first().student_true_name
         # user_ture_name = User.objects.filter(first_name=user_obj).values("first_name")
         sports = SportMeet.objects.all()
 
-        return render(request, 'apply.html', {"user_true_name": user_true_name, "sports": sports})
+        return render(request, 'apply.html', {"user_true_name": user_obj, "sports": sports})
 
 
 def status(request):
