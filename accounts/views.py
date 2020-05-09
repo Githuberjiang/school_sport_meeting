@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import UpdateView
+from boards.models import StudentUser
 
 from .forms import SignUpForm, UserInformationUpdateForm
 
@@ -26,6 +27,8 @@ class UserUpdateView(UpdateView):
     form_class = UserInformationUpdateForm
     template_name = 'my_account.html'
     success_url = reverse_lazy('my_account')
+    print(1)
+
 
     def get_object(self):
         return self.request.user

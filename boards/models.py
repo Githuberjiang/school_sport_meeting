@@ -19,7 +19,7 @@ class StudentUser(models.Model):
     student_password = models.CharField("密码", max_length=16)
     student_college = models.CharField("学院", max_length=16)
     student_class = models.CharField("班级", max_length=16)
-    student_true_name = models.CharField("姓名", max_length=16)
+    # student_true_name = models.CharField("姓名", max_length=16)
     sex_type = (('男', '男'), ('女', '女'))
     phone_number = models.CharField("电话",max_length=11, default=13345678889)
 
@@ -34,6 +34,7 @@ class Notice(models.Model):
     notice_title = models.CharField("公告标题", max_length=16, default="")
     notice_type = models.CharField("公告类型", max_length=16, default="图片新闻", choices=(('图片新闻', '图片新闻'), ('视频新闻', '视频新闻')))
     notice_content = models.CharField("内容描述", max_length=140, default="")
+    notice_video_content = models.FileField('上传公告文件', upload_to='static')
     update_group = models.CharField("上传单位", max_length=16, default='')
     update_user = models.CharField("作者", max_length=16, default='')
     update_date = models.DateField("日期", auto_now=True)

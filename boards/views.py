@@ -37,7 +37,8 @@ class ShowScores(ListView):
 def apply(request):
     global sport_limit_dict
     sport_name = SportMeet.objects.all().values_list()
-    print(sport_name)
+    sport_limit_dict = { k:v for k,v in [(i[1], i[2]) for i in sport_name]}
+    print(sport_limit_dict)
     if request.method == "POST":
 
         form_data = request.POST
@@ -49,6 +50,10 @@ def apply(request):
         if spo_obj and stu_obj:
             if Application.objects.filter(sport_id=spo_obj[0], user_id=stu_obj[0]):
                 err = "报名信息已存在"
+                return render(request, 'apply.html', {"err": err})
+            print(len(Application.objects.filter(sport_id=spo_obj)))
+            if len(Application.objects.filter(sport_id=spo_obj)) >= sport_limit_dict.get(spo_name):
+                err = "人数已满"
                 return render(request, 'apply.html', {"err": err})
             Application.objects.create(sport_id=spo_obj[0], user_id=stu_obj[0])
             status = Application.objects.filter(user_id=stu_obj)[0].app_status

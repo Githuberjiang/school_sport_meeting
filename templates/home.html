@@ -14,6 +14,7 @@
 
         <th>公告标题</th>
         <th>内容描述</th>
+        <th>公告文件</th>
         <th>上传单位</th>
         <th>作者</th>
         <th>日期</th>
@@ -22,30 +23,23 @@
     <tbody>
       {% for board in boards %}
         <tr>
-{#          <td >#}
-{#            <span class="text-muted d-block">{{ board.notice_id }}</span>#}
-{#          </td>#}
-
-          <td class="align-middle">
-{#              <span>请填写公告类型</span>#}
+          <td class="align-middle ">
             {{ board.notice_title }}
           </td>
-          <td class="align-middle">
-
+          <td class="align-middle ">
             {{ board.notice_content }}
-
           </td>
-          <td class="align-middle">
+          <td class="align-middle ">
+              <a href="{{ board.notice_video_content }}">{{ board.notice_video_content }}</a>
+          </td>
+          <td class="align-middle ">
               {{board.update_group}}
-
           </td>
-          <td class="align-middle">
+          <td class="align-middle ">
               {{board.update_user}}
-
           </td>
-          <td class="align-middle">
+          <td class="align-middle ">
               {{board.update_date}}
-
           </td>
         </tr>
       {% endfor %}
