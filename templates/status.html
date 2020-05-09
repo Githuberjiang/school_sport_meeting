@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block breadcrumb %}
+    <li class=" active"><span>
+      <form method="post" action="/apply/">
+{#  {% csrf_token %}#}
+{#   <input type="search" class="input-group-sm" placeholder="报名信息" name="q" required>#}
+{#   <input type="search" class="input-group-sm" placeholder="报名信息" name="q" required>#}
+{#   <input type="search" class="input-group-sm" placeholder="报名信息" name="q" required>#}
+{#   <input type="search" class="input-group-sm" placeholder="报名信息" name="q" required>#}
+      <div class="form-group">
+
+          {{ studen_name }}
+		<label for="lastname" class="col-sm-12 control-label">s</label>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" id="lastname" 
+                   placeholder="请输入真实姓名" name="student_name" value="{{ user_true_name }}">
+		</div>
+    </div>
+      <div class="form-group">
+		<label for="apply" class="col-sm-12 control-label">s</label>
+		<div class="col-sm-3">
+{#			<input type="text" class="form-control" id="apply"#}
+{#                   placeholder="请输入报名项目" name="sport_name" >#}
+             <select name="sport_name">
+            {% for sport in sports %}
+                    <option value="{{ sport.sport_name }}">{{ sport.sport_name }}</option>
+            {% endfor %}
+             </select>
+
+		</div>
+    </div>
+          {{ err }}
+      <div class="form-group col-sm-1">
+
+    <button type="submit" class="btn-block">提交</button>
+      </div>
+</form>
+  </span></li>
+
+{% endblock %}
+
+{#{% block content %}#}
+{#    <table class="table">#}
+{#        <thead class="thead-inverse">#}
+{#        <tr>#}
+{##}
+{#            <th>项目名称</th>#}
+{#            <th>限定人数</th>#}
+{#            <th>比赛分组</th>#}
+{#            <th>比赛地点</th>#}
+{#            <th>比赛时间</th>#}
+{#            <th>比赛场次</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for sport in search_list %}#}
+{#            <tr>#}
+{##}
+{##}
+{#                <td class="align-middle">#}
+{#              <span>请填写公告类型</span>#}
+{#                    {{ sport.sport_name }}#}
+{#                </td>#}
+{#                <td class="align-middle">#}
+{##}
+{#                    {{ sport.sport_limit_people }}#}
+{##}
+{#                </td>#}
+{#                <td class="align-middle">#}
+{#                    {{ sport.sport_group }}#}
+{##}
+{#                </td>#}
+{#                <td class="align-middle">#}
+{#                    {{ sport.sport_address }}#}
+{##}
+{#                </td>#}
+{#                <td class="align-middle">#}
+{#                    {{ sport.sport_date }}#}
+{##}
+{#                </td>#}
+{#                <td class="align-middle">#}
+{#                    {{ sport.sport_session }}#}
+{##}
+{#                </td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{#{% endblock %}#}

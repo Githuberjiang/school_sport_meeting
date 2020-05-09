@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block breadcrumb %}
+  <li class="active"><span>运动会成绩展示</span></li>
+
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+
+        <th>学院</th>
+        <th>班级</th>
+        <th>姓名</th>
+        <th>获奖项目</th>
+        <th>参赛日期</th>
+        <th>名次等级</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for score in scores %}
+        <tr>
+
+
+          <td class="align-middle">
+            {{ score.scores_college }}
+          </td>
+          <td class="align-middle">
+            {{ score.student_class }}
+          </td>
+          <td class="align-middle">
+              {{score.student_name}}
+
+          </td>
+          <td class="align-middle">
+              {{score.winner_sport}}
+
+          </td>
+          <td class="align-middle">
+              {{score.apply_date}}
+
+          </td>
+          <td class="align-middle">
+              {{score.sport_rank}}
+
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

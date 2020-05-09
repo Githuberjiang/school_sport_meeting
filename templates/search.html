@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block breadcrumb %}
+    <li class=" active"><span>
+      <form method="post" action="/search/">
+{#  {% csrf_token %}#}
+   <input type="search" class="input-group-sm" placeholder="搜索运动会名称"  name="q" required>
+  <button type="submit" class="btn">搜索</button>
+</form>
+  </span></li>
+
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-inverse">
+        <tr>
+
+            <th>项目名称</th>
+            <th>限定人数</th>
+            <th>比赛分组</th>
+            <th>比赛地点</th>
+            <th>比赛时间</th>
+            <th>比赛场次</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sport in search_list %}
+            <tr>
+
+
+                <td class="align-middle">
+                    {#              <span>请填写公告类型</span>#}
+                    {{ sport.sport_name }}
+                </td>
+                <td class="align-middle">
+
+                    {{ sport.sport_limit_people }}
+
+                </td>
+                <td class="align-middle">
+                    {{ sport.sport_group }}
+
+                </td>
+                <td class="align-middle">
+                    {{ sport.sport_address }}
+
+                </td>
+                <td class="align-middle">
+                    {{ sport.sport_date }}
+
+                </td>
+                <td class="align-middle">
+                    {{ sport.sport_session }}
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

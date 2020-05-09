@@ -3,7 +3,14 @@
 {% load humanize %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active"><span>运动会信息展示</span></li>
+  <li class=" active"><span>
+      <form method="post" action="/search/">
+  {% csrf_token %}
+  <input type="search" class="col-3" placeholder="搜索运动会名称"  name="q" required>
+  <button type="submit" class="btn">搜索</button>
+</form>
+  </span></li>
+
 {% endblock %}
 
 {% block content %}
@@ -16,6 +23,7 @@
         <th>比赛分组</th>
         <th>比赛地点</th>
         <th>比赛时间</th>
+        <th>比赛场次</th>
       </tr>
     </thead>
     <tbody>
@@ -42,6 +50,10 @@
           </td>
           <td class="align-middle">
               {{sport.sport_date}}
+
+          </td>
+          <td class="align-middle">
+              {{sport.sport_session}}
 
           </td>
         </tr>
